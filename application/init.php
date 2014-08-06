@@ -1,6 +1,9 @@
 <?php
+	
+	//se inicia la sesion
+	session_start();
 
-	$numero_max_registros_vista;
+	$numero_max_registros_vista = 15;
 
 
 	// se define la ruta donde estan los recursos publicos, como css, js, etc.

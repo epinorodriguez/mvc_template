@@ -15,6 +15,12 @@ class Application
     {
         $url = $this->parseUrl();
 
+        //verificar que exista una sesion, si no redirecciona a vista de login
+        if ($url[0] !== 'usuario' && (!isset($_SESSION['sesion_id']) || empty($_SESSION['sesion_id'])) && $_GET['seccion'] != 'sesion' ) {
+            header('Location: /mvc_template/usuario');
+        }
+
+
         if (file_exists('application/controllers/' . $url[0] . '.control.php')) 
         {
             $this->controller = $url[0];

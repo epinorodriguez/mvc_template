@@ -17,21 +17,38 @@ class Usuario extends Controller
         $this->css_array = $this->css_globales;
         $this->js_array = $this->js_globales;        
 
-        $this->js_array = array_merge($this->js_array, array('inicio.js'));
+        $this->js_array = array_merge($this->js_array, array('usuario.js'));
     }
 
-    public function agregar()
+    public function iniciar()
     {
         if($this->ajax){
 
-            $usuario = $_POST['usuario'];
-            $password = $_POST['password'];
+            $this->loadLib('validador');
 
-            $usuario = json_encode(array(
-                "usuario" => $usuario,
-                "password" => $password
-            ));
-            echo $usuario;
+            $validador = new Validador();
+
+            $reglas = array(
+                        'rut' => 'rut|requerido',
+                        'password' => 'numero|requerido',
+                        'token' => 'token|requerido'
+                        );
+
+            if ($validador->validar($_POST, $reglas)) {
+                $usuario = $_POST['rut'];
+                $password = $_POST['password'];
+
+                $usuario = json_encode(array(
+                    "usuario" => $usuario,
+                    "password" => $password
+                ));
+
+                echo $usuario;
+            }else{
+                echo 'false';
+            }
+
+            
         }else{
             //redirecciona la vista por defecto
             $this->index();
@@ -42,14 +59,12 @@ class Usuario extends Controller
     /**
      * This method handles what happens when you move to http://yourproject/home/index
      */
-    public function index($usuario = '')
+    public function index()
     {
-        $users = $this->loadModel('User');
-        $resultado= $users->latestUsers();
 
 
-        $this->loadView('_templates/header');
-        $this->loadView('inicio', ['usuarios' => $resultado]);
+        $this->loadView('_templates/header_vacio');
+        $this->loadView('usuario/sesion');
         $this->loadView('_templates/footer');
     }
 

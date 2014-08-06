@@ -8,7 +8,7 @@ class Controller
     // arrays con los archivos para cargar por las vistas
     public $css_globales = array('global.css', 'bootstrap.min.css', 'bootstrap-theme.min.css', 
         'bootstrapValidator.css', 'select2.css', 'select2-bootstrap.css');
-    
+
     public $js_globales = array('jquery.js', 'bootstrap.min.js', 'moment.min.js',  
         'bootstrap-datetimepicker.min.js', 'bootstrapValidator.min.js',
         'jquery.bootstrap-growl.min.js');
@@ -31,6 +31,10 @@ class Controller
         $this->ajax = $this->isXmlHttpRequest();
 
 
+        //generar token
+        $this->loadLib('csrf');
+        $csrf = new CSRF();
+        $csrf->get_token();
     }
 
     /**
@@ -63,6 +67,11 @@ class Controller
     protected function loadView($view_name, $data = [])
     {
         require 'application/views/' . $view_name . '.view.php';         
+    }
+
+    protected function loadLib($lib_name)
+    {
+        require 'application/libs/' . $lib_name . '.php';         
     }
 
 
