@@ -1,0 +1,11 @@
+.navbar-brand{
+  width: 135px;
+}
+
+#logo{
+  width: 100px;
+  height: 40px;  
+  position: absolute;
+  margin-top: -10px;
+  margin-left: 15px;
+}

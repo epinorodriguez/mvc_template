@@ -31,7 +31,7 @@ class Inicio extends Controller
 
 
         $this->loadView('_templates/header');
-        //$this->loadView('inicio', ['usuarios' => $resultado]);
+        $this->loadView('inicio', ['usuarios' => $resultado]);
         $this->loadView('_templates/footer');
     }
 

@@ -28,8 +28,8 @@ class Usuario extends Controller
             $password = $_POST['password'];
 
             $usuario = json_encode(array(
-            "usuario" => $usuario,
-            "password" => $password
+                "usuario" => $usuario,
+                "password" => $password
             ));
             echo $usuario;
         }else{

@@ -6,8 +6,12 @@
 class Controller
 {
     // arrays con los archivos para cargar por las vistas
-    public $css_globales = array('style.css');
-    public $js_globales = array('jquery.js');
+    public $css_globales = array('global.css', 'bootstrap.min.css', 'bootstrap-theme.min.css', 
+        'bootstrapValidator.css', 'select2.css', 'select2-bootstrap.css');
+    
+    public $js_globales = array('jquery.js', 'bootstrap.min.js', 'moment.min.js',  
+        'bootstrap-datetimepicker.min.js', 'bootstrapValidator.min.js',
+        'jquery.bootstrap-growl.min.js');
 
     public $titulo_vista = 'Inicio';
 
@@ -22,7 +26,7 @@ class Controller
     function __construct()
     {
         $this->openDatabaseConnection();
-        
+
 
         $this->ajax = $this->isXmlHttpRequest();
 
