@@ -6,6 +6,8 @@ class Application
     private $method = 'index';
     private $parameters  = [];
 
+    protected $ajax = false;
+
     /**
      * initializes the application, its controller and method is verified
      */
@@ -50,4 +52,6 @@ class Application
             return $url;
         }
     }
+
+    
 }

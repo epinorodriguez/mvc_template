@@ -20,7 +20,9 @@
 
 		public function latestUsers()
 		{
-			$sql = "SELECT username FROM users ORDER BY created DESC LIMIT 3";
+			$sql = "
+				SELECT username FROM users ORDER BY created DESC LIMIT 3
+			";
 			$result = $this->db->query($sql);
 			return $result->fetchAll();
 		}

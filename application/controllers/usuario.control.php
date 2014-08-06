@@ -1,10 +1,10 @@
 <?php
-
 /**
  * Class Inicio
  */
-class Inicio extends Controller
+class Usuario extends Controller
 {
+
     public $titulo_vista;
     public $js_array;
     public $css_array;
@@ -20,6 +20,24 @@ class Inicio extends Controller
         $this->js_array = array_merge($this->js_array, array('inicio.js'));
     }
 
+    public function agregar()
+    {
+        if($this->ajax){
+
+            $usuario = $_POST['usuario'];
+            $password = $_POST['password'];
+
+            $usuario = json_encode(array(
+            "usuario" => $usuario,
+            "password" => $password
+            ));
+            echo $usuario;
+        }else{
+            //redirecciona la vista por defecto
+            $this->index();
+        }
+        
+    }
 
     /**
      * This method handles what happens when you move to http://yourproject/home/index
@@ -31,8 +49,9 @@ class Inicio extends Controller
 
 
         $this->loadView('_templates/header');
-        //$this->loadView('inicio', ['usuarios' => $resultado]);
+        $this->loadView('inicio', ['usuarios' => $resultado]);
         $this->loadView('_templates/footer');
     }
+
 
 }

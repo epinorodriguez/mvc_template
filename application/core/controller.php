@@ -6,11 +6,15 @@
 class Controller
 {
     // arrays con los archivos para cargar por las vistas
-    public $css_array = array('style.css');
-    public $js_array = array('jquery.js');
+    public $css_globales = array('style.css');
+    public $js_globales = array('jquery.js');
+
+    public $titulo_vista = 'Inicio';
 
     // var conexion con la db
     public $db = null;
+
+    protected $ajax;
 
     /**
      * siempre que se instancia de crea una conexion con la db
@@ -18,6 +22,11 @@ class Controller
     function __construct()
     {
         $this->openDatabaseConnection();
+        
+
+        $this->ajax = $this->isXmlHttpRequest();
+
+
     }
 
     /**
@@ -50,5 +59,17 @@ class Controller
     protected function loadView($view_name, $data = [])
     {
         require 'application/views/' . $view_name . '.view.php';         
+    }
+
+
+
+    /**
+     * verifica si la peticion es por ajax
+     * @return boolean returna true si es ajax
+     */
+    function isXmlHttpRequest()
+    {
+        $header = isset($_SERVER['HTTP_X_REQUESTED_WITH']) ? $_SERVER['HTTP_X_REQUESTED_WITH'] : null;
+        return ($header === 'XMLHttpRequest');
     }
 }
